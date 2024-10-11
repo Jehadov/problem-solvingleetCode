@@ -1,0 +1,21 @@
+public class Solution {
+    public int LengthOfLongestSubstring(string s) {
+        string check = "";
+        int count = 0;
+        bool NoRepeat = true;
+
+        foreach (char c in s)
+        {
+            if (check.Contains(c))
+            {
+                NoRepeat=false;
+                count =(check.Count() > count)? check.Count():count;
+                check = $"{c}";
+            }
+            else check+=c;
+        }
+        if(NoRepeat) return check.Count();
+        return (check.Count() > count)? check.Count():count;
+
+ }
+}
