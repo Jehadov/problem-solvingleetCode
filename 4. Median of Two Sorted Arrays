@@ -1,0 +1,9 @@
+using System.Linq;
+public class Solution {
+    public double FindMedianSortedArrays(int[] nums1, int[] nums2) {
+        List<int> result = nums1.Concat(nums2).ToList().OrderBy(x => x).ToList();
+        if(result.Count%2 == 0) return ((result[result.Count /2]+ result[result.Count /2 - 1])/2.0);
+            else return (result[result.Count / 2]);
+
+        }    
+}
