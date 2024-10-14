@@ -1,0 +1,25 @@
+public class Solution {
+        public string LongestCommonPrefix(string[] strs)
+        {
+            if(strs.Contains("")) return "";
+            if(strs.Length == 1) return strs[0];
+            
+            string samelar = strs[0];
+            string res = "";
+            int i = 0;
+            foreach (var item in strs)
+            {
+                int iteration = (item.Length - 1 < samelar.Length - 1) ? item.Length - 1: samelar.Length - 1;
+                while ( i <= iteration && samelar[i] == item[i] )
+                {
+                    res += item[i];
+                    i++;
+                }
+                samelar = res;
+                res = "";
+                i = 0;
+                if(samelar == "") return samelar;
+            }
+            return samelar;
+        }
+}
