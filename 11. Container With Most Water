@@ -1,0 +1,16 @@
+public class Solution {
+    public int MaxArea(int[] height) {
+            int left = 0,right = height.Length - 1,width = 0, Maxsize = 0;
+            
+                while (left < right)
+                {
+                    int heights = (height[left] < height[right])? height[left] : height[right];
+                    width = right - left;
+                    Maxsize = ((heights * width) > Maxsize) ? heights * width: Maxsize;
+                if (height[left] < height[right]) left++;
+                    else right--;
+                }
+
+            return Maxsize;
+    }
+}
