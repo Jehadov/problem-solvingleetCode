@@ -1,0 +1,62 @@
+public class Solution {
+        public int MyAtoi(string s)
+        {
+            if (s == "" || s == "  " || s[0] == '.'  || (s.Length == 1 && !(s[0] >= '0' && s[0] <= '9'))) return 0;
+            if (s[0] >= 'A' && s[0] <= 'Z' || s[0] >= 'a' && s[0] <= 'z') return 0;
+            string data = "";
+            int convertToIntger = 1;
+            bool justonce = true;
+            for (int i =0; i< s.Length;i++)
+            {
+                int check = ((i > 0) ? i - 1 : i);
+                if((s[i] == '+' && s[check] == '-' || s[check] == '+' && s[i] == '-' ) )
+                {
+                    try
+                    {
+                        convertToIntger = convertToIntger * int.Parse(data);
+                        return convertToIntger;
+                    }
+                    catch (Exception)
+                    {
+                        return 0;
+                    }
+                } 
+                if (s[i] >= '0' && s[i] <= '9')
+                    data += s[i];
+                else if (s[i] >= 'A' && s[i] <= 'z' || s[i] == '.' || ((s[i] == ' ' || s[i] == '-' || s[i] == '+') && s[check] >= '0' && s[check] <= '9')) 
+                {
+                    try
+                    {
+                        if (double.Parse(data)* convertToIntger >= int.MaxValue) return int.MaxValue;
+                        if (double.Parse(data)* convertToIntger <= int.MinValue) return int.MinValue;
+                        convertToIntger = convertToIntger * int.Parse(data);
+                        return convertToIntger;
+                    }
+                    catch (Exception)
+                    {
+                        return 0;
+                    }
+                }
+                                else if (s[i] == '-' && justonce) 
+                {
+                    justonce = false;
+                    convertToIntger = -1;
+                    if (s[0] != '-' && s[0] != ' ') return s[0] - 48;
+                }
+
+            }
+            try
+            {
+                if (double.Parse(s) >= int.MaxValue) return int.MaxValue;
+                if (double.Parse(s) <= int.MinValue) return int.MinValue;
+
+                convertToIntger = convertToIntger * int.Parse(data);
+                return convertToIntger;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+
+        }
+}
