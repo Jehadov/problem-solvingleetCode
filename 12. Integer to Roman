@@ -1,24 +1,33 @@
 public class Solution {
-            public Dictionary<char, int> romanDigits = new Dictionary<char, int>()
+        public Dictionary<int, string> romanDigit = new Dictionary<int, string>()
         {
-            { 'I', 1 },
-            { 'V', 5 },
-            { 'X', 10 },
-            { 'L', 50 },
-            { 'C', 100 },
-            { 'D', 500 },
-            { 'M', 1000 }
+            { 1000, "M" },
+            { 900, "CM" },
+            { 500, "D" },
+            { 400, "CD" },
+            { 100, "C" },
+            { 90, "XC" },
+            { 50, "L" },
+            { 40, "XL" },
+            { 10, "X" },
+            { 9, "IX" },
+            { 5, "V" },
+            { 4, "IV" },
+            { 1, "I" }   
         };
-    public int RomanToInt(string s) {
-            int res = 0;
-            for (int i = 0; i < s.Length; i++)
+        public string IntToRoman(int num)
+        {
+            string res = "";
+            foreach (var item in romanDigit.Keys)
             {
-                int value = (i + 1 == s.Length) ? romanDigits[s[i]] : romanDigits[s[i+1]];
-                if (romanDigits[s[i]] < value ) res -= romanDigits[s[i]];
-                else res += romanDigits[s[i]];
-            }
-        
+                while (item <= num)
+                {
+                    res += romanDigit[item];
+                    num -= item;
+                }
+            }            
             return res;
-
-    }
+        }
 }
+
+
